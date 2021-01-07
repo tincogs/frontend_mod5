@@ -40,6 +40,8 @@ class NewProjectForm extends Component {
         })
       }
 
+      handleBack = () => {this.props.history.push('/dashboard')}
+
       handleSubmit = (e) => {
         e.preventDefault()
 
@@ -89,7 +91,11 @@ class NewProjectForm extends Component {
               <h3>Project Status</h3>
                <h5>Incomplete   <Checkbox toggle style={{color: 'green'}}onClick={() => this.setState({complete: !this.state.complete})}/>   Complete</h5>
               <br />
-              <Button color='green' type='submit' size='huge'>Submit</Button>
+              <Button.Group size='large'>
+                  <Button color='pink' onClick={this.handleBack}>Back</Button>
+                  <Button.Or />
+                  <Button color='pink' type='submit'>Submit</Button>
+              </Button.Group>
               </Form>
             </div>
         )

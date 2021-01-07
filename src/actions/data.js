@@ -80,6 +80,13 @@ export const currentProperty= (property) => {
     }
   }
 
+  export const quickCloseAction = (project) => {
+    return {
+      type: 'QUICK_CLOSE',
+      project
+    }
+  }
+
   export const deleteProject = (id) => {
     return {
       type: 'DELETE_PROJECT',

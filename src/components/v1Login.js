@@ -32,6 +32,7 @@ class Login extends React.Component {
           <i className={`building icon massive`} />
           <h1>Real Reports</h1>
           <h3>Real Estate Project Management & Reporting</h3>
+          <div>
           <GoogleLogin
             scope="https://www.googleapis.com/auth/gmail.readonly"
             clientId={CLIENT_ID}
@@ -47,6 +48,7 @@ class Login extends React.Component {
             offline='code'
             discoveryDocs="https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"
           />
+          </div>
         </div>
       );
    }

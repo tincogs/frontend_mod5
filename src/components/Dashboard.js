@@ -167,7 +167,7 @@ class Dashboard extends React.Component {
             <GmailContainer updateGmails={this.updateGmails} history={this.props.history}/>
             <br />
             <br />
-            <OpenProjectsContainer history={this.props.history} getProjects={this.getProjects}/>
+            <OpenProjectsContainer history={this.props.history} updateOpenProjects={this.updateOpenProjects} updateClosedProjects={this.updateClosedProjects}/>
             <br />
             <br />
             <ClosedProjectsContainer history={this.props.history}/>

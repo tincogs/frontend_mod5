@@ -10,8 +10,11 @@ const openProjects = (state=[], action ) => {
       :
       updatedProjects = state.filter(p => p.id !== action.updatedProject.id)
       updatedProjects.push(action.updatedProject)
-      return updatedProjects
 
+      return updatedProjects
+    case 'QUICK_CLOSE':
+      updatedProjects = state.filter(p => p.id !== action.project.id)
+      return updatedProjects
     case 'NEW_PROJECT':
       action.newProject.complete
       ?

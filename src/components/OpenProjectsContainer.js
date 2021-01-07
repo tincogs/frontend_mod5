@@ -11,7 +11,7 @@ class OpenProjectsContainer extends React.Component {
             <div className='tbl container'>
               {this.props.projects
                 ?
-               <OpenProjects history={this.props.history} getProjects={this.props.getProjects}/>
+               <OpenProjects history={this.props.history} updateOpenProjects={this.props.updateOpenProjects} updateClosedProjects={this.props.updateClosedProjects}/>
                 :
                <h5>Open Projects Table Loading...</h5>
               }

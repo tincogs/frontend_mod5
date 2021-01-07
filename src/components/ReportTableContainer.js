@@ -8,10 +8,10 @@ class ReportTableContainer extends React.Component {
 
     render() {
         return (
-            <div className='tbl container'>
+            <div className='report container'>
               {this.props.projects
                 ?
-               <ReportTable history={this.props.history} data={this.props.projects}/>
+               <ReportTable />
                 :
                <h5>Project Report Loading...</h5>
               }

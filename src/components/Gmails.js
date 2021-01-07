@@ -228,15 +228,16 @@ class Gmails extends React.Component {
                     }
                   </div>
                 ),
-              grow: 1.5,
-              sortable: true
+              sortable: true,
+              wrap: true
             },
             {
-              name: 'Body',
+              name: '',
               cell: row => <div data-tag="allowRowEvents"><div style={{ fontWeight: 400 }}>{row.body}</div></div>,
               sortable: false,
               wrap: true,
-              left: true
+              left: true,
+              grow: 2
             },
             {
                 name: '',

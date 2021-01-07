@@ -125,9 +125,10 @@ class ClosedProjects extends React.Component {
                 sortable: true
             },
             {
-                name: 'Description',
+                name: 'Details',
                 cell: row => <div style={{ fontWeight: 400 }}>{row.description}</div>,
-                sortable: false
+                sortable: false,
+                grow: 2
             },
             {
                 name: 'Date Closed',

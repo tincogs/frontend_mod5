@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Checkbox } from 'semantic-ui-react'
 import DataTable from 'react-data-table-component';
-import { editProject, updateProject } from '../actions/data';
+import { editProject, quickCloseAction } from '../actions/data';
 
 let columns;
 let quickClose;
@@ -118,12 +118,13 @@ class OpenProjects extends React.Component {
                 if (data.error) {
                     alert(data.error)
                 } else {
-                    this.props.updateProject(data)
+                    // this.props.updateOpenProjects()
+                    // this.props.updateClosedProjects()
+                    this.props.quickCloseAction(data)
                 }
               })
         })
         this.handleClearRows()
-        this.props.getProjects()
       }
 
     updateButton = () => (<Button class="ui compact button" color='teal' onClick={(e)=> this.handleClick(e)}>Update</Button>)
@@ -155,9 +156,10 @@ class OpenProjects extends React.Component {
                 sortable: true
             },
             {
-                name: 'Description',
+                name: 'Details',
                 cell: row => <div data-tag="allowRowEvents"><div style={{ fontWeight: 400 }}>{row.description}</div></div>,
-                sortable: false
+                sortable: false,
+                grow: 2
             },
             {
                 name: 'Action Item',
@@ -179,7 +181,7 @@ class OpenProjects extends React.Component {
                 name: '',
                 // button: true,
                 // ignoreRowClick: true,
-                cell: () => <this.updateButton class="ui compact button">Update Project</this.updateButton>
+                cell: () => <this.updateButton className="ui compact button">Update Project</this.updateButton>
             }
         ]
 
@@ -232,7 +234,7 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = {
     editProject,
-    updateProject
+    quickCloseAction
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenProjects)

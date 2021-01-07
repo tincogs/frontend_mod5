@@ -12,6 +12,10 @@ const closedProjects = (state=[], action ) => {
 
         return updatedProjects
 
+      case 'QUICK_CLOSE':
+        updatedProjects = [...state, action.project]
+        return updatedProjects
+
       case 'NEW_PROJECT':
         action.newProject.complete
         ?

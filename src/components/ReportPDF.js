@@ -8,113 +8,77 @@ import ReportTableContainer from './ReportTableContainer';
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#E4E4E4',
     flexDirection: 'row',
     flexWrap:'wrap',
-    justifyContent:'flex-start'
+    justifyContent:'space-evenly',
+    alignItems: 'flex-start'
   },
   section: {
-    margin: 4,
-    paddingTop:10,
-    marginTop:'6%',
+    marginTop:'7%',
+    marginRight:'3%',
+    marginLeft:'3%',
     display: 'flex',
     border:1,
     order: 3,
-    maxHeight:'40%'
+    maxHeight: '40%',
+    maxWidth: '45%',
+    flexGrow: 1,
+    flexBasis: 'auto'
   },
   title: {
     fontSize: 24,
     textAlign: 'center',
+    paddingTop: 20,
     marginBottom: 20,
-    marginTop: 20,
-    paddingBottom: 10,
     justifyContent:'space-around',
-    width:'100%'
+    width:'100%',
+    color:'#022140',
+    textDecoration: 'underline'
   },
   cell: {
-      fontSize: 10,
-      backgroundColor:'#e0effe'
+      fontSize: 11,
+      backgroundColor:'#e0effe',
+      paddingTop:3,
+      paddingBottom:3
   },
   header: {
-      fontSize: 16,
-      fontWeight: 'bold'
+      fontSize: 12,
+      fontWeight: 'bolder',
+      backgroundColor:'#265077',
+      color:'#ffffff',
+      paddingTop:2,
+      paddingBottom:2
   }
 });
-
-const reportDate = () => {
-    let dt = new Date()
-    let output = dt.getMonth( ) + 1 + '-' + dt.getDate( ) + '-' + dt.getFullYear( )
-    return output
-}
-
-let columns;
-let data;
 
 class ReportPDF extends React.Component {
 
   componentDidMount() {
-    data = this.props.reportProjects
-    columns = [
-      {
-          name: 'Date Opened',
-          selector: 'created_at',
-          format: row => <div><div style={{ fontWeight: 400 }}>{new Date(Date.parse(row.created_at)).getMonth() + 1 + '/' + new Date(Date.parse(row.created_at)).getDate() + '/' + new Date(Date.parse(row.created_at)).getFullYear()}</div></div>,
-          sortable: true
-      },
-      {
-          name: 'Project',
-          selector: 'name',
-          cell: row => <div style={{ fontWeight: 400 }}>{row.name}</div>,
-          sortable: true
-      },
-      {
-          name: 'Category',
-          selector: 'category',
-          sortable: true
-      },
-      {
-          name: 'Subcategory',
-          selector: 'subcategory',
-          sortable: true
-      },
-      {
-          name: 'Description',
-          cell: row => <div style={{ fontWeight: 400 }}>{row.description}</div>,
-          sortable: false
-      },
-      {
-          name: 'Date Closed',
-          selector: 'updated_at',
-          format: row => <div style={{ fontWeight: 400 }}>{new Date(Date.parse(row.updated_at)).getMonth() + 1 + '/' + new Date(Date.parse(row.updated_at)).getDate() + '/' + new Date(Date.parse(row.updated_at)).getFullYear()}</div>,
-          sortable: true
-      },
-  ]
+
   }
 
     handleClick = (e) => {
-        console.log(e, 'Button click')
+      window.open('https://mail.google.com/mail/u/0/#compose')
+      this.props.history.push('/dashboard')
     }
 
-    openDate = (index) => {
-        let odt = new Date(Date.parse(this.props.reportProjects.find(x => x.id === index).created_at)).getMonth() + 1 + '/' + new Date(Date.parse(this.props.reportProjects[index].created_at)).getDate() + '/' + new Date(Date.parse(this.props.reportProjects[index].created_at)).getFullYear()
-        return odt
+    reportDate = () => {
+      let dt = new Date()
+      let output = this.monthName(dt) + ' ' + dt.getDate( ) + ', ' + dt.getFullYear( )
+      return output
     }
 
-    closeDate = (index) => {
-        let cdt = new Date(Date.parse(this.props.reportProjects.find(x => x.id === index).updated_at)).getMonth() + 1 + '/' + new Date(Date.parse(this.props.reportProjects[index].updated_at)).getDate() + '/' + new Date(Date.parse(this.props.reportProjects[index].updated_at)).getFullYear()
-        return cdt
-    }
-
-    projectName = () => {
-        let projNames = this.props.reportProjects.map(p => <Text style={{borderTop:2}}>{p.name}</Text>);
-        console.log(projNames)
+    monthName = (date) => {
+      const dateNmbr = new Date(Date.parse(date))
+      const month = dateNmbr.toLocaleString('default', { month: 'long' })
+      return month
     }
 
     MyDoc = (props) => (
         <Document>
           <Page size='letter' style={styles.page} orientation='landscape' wrap>
             <View>
-            <Text style={styles.title} debug='true'>{`Project Report for ${reportDate()}`}</Text>
+            <Text style={styles.title} debug>{`${this.reportDate()} Project Report for ${this.props.property[0].address}`}</Text>
             </View>
             {
                 props.data
@@ -129,11 +93,11 @@ class ReportPDF extends React.Component {
                                 <Text style={styles.header}>SubCategory:</Text>
                                 <Text style={styles.cell}>{p.subcategory ? p.subcategory : "N/A"}</Text>
                                 <Text style={styles.header}>Description:</Text>
-                                <Text style={styles.cell}>{p.description}</Text>
+                                <Text style={styles.cell} wrap>{p.description}</Text>
                                 <Text style={styles.header}>Date Opened:</Text>
-                                <Text style={styles.cell}>{p.created_at}</Text>
+                                <Text style={styles.cell}>{new Date(Date.parse(p.created_at)).getMonth() + 1 + '/' + new Date(Date.parse(p.created_at)).getDate() + '/' + new Date(Date.parse(p.created_at)).getFullYear()}</Text>
                                 <Text style={styles.header}>Date Closed:</Text>
-                                <Text style={styles.cell}>{p.updated_at}</Text>
+                                <Text style={styles.cell}>{new Date(Date.parse(p.updated_at)).getMonth() + 1 + '/' + new Date(Date.parse(p.updated_at)).getDate() + '/' + new Date(Date.parse(p.updated_at)).getFullYear()}</Text>
                             </View>
                     );
                   })
@@ -146,7 +110,7 @@ class ReportPDF extends React.Component {
 
     DownloadBtn = () => (
         <Button onClick={(e) => this.handleClick(e)} >
-          <PDFDownloadLink document={<this.MyDoc data={this.props.reportProjects}/>} fileName={`${reportDate()} Report.pdf`}>
+          <PDFDownloadLink document={<this.MyDoc data={this.props.reportProjects}/>} fileName={`${this.reportDate()} Report.pdf`}>
             {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download Report')}
           </PDFDownloadLink>
         </Button>
@@ -157,8 +121,9 @@ class ReportPDF extends React.Component {
             <div style={{textAlign: 'center', paddingTop: '5px'}}>
                 {this.props.reportProjects
                 ?
-                <div>
+                <div className='pdf container'>
                 <ReportTableContainer />
+                <br/>
                 <this.DownloadBtn>Download Report PDF</this.DownloadBtn>
                 </div>
                 :

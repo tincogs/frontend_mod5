@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import DataTable from 'react-data-table-component';
 
-let columns;
 
 const customStyles = {
     header: {
@@ -77,30 +76,34 @@ const customStyles = {
 
 class ReportTable extends React.Component {
 
+    state = {
+      columns: []
+    }
+
     componentDidMount(){
 
-        columns = [
+       let columns = [
             {
                 name: 'Date Opened',
                 selector: 'created_at',
                 format: row => <div><div style={{ fontWeight: 400 }}>{new Date(Date.parse(row.created_at)).getMonth() + 1 + '/' + new Date(Date.parse(row.created_at)).getDate() + '/' + new Date(Date.parse(row.created_at)).getFullYear()}</div></div>,
-                sortable: true
+                sortable: false
             },
             {
                 name: 'Project',
                 selector: 'name',
                 cell: row => <div style={{ fontWeight: 400 }}>{row.name}</div>,
-                sortable: true
+                sortable: false
             },
             {
                 name: 'Category',
                 selector: 'category',
-                sortable: true
+                sortable: false
             },
             {
                 name: 'Subcategory',
                 selector: 'subcategory',
-                sortable: true
+                sortable: false
             },
             {
                 name: 'Description',
@@ -112,10 +115,12 @@ class ReportTable extends React.Component {
                 name: 'Date Closed',
                 selector: 'updated_at',
                 format: row => <div style={{ fontWeight: 400 }}>{new Date(Date.parse(row.updated_at)).getMonth() + 1 + '/' + new Date(Date.parse(row.updated_at)).getDate() + '/' + new Date(Date.parse(row.updated_at)).getFullYear()}</div>,
-                sortable: true
+                sortable: false
             },
         ]
-
+        this.setState({
+          columns: columns
+        })
     }
 
 
@@ -127,10 +132,13 @@ class ReportTable extends React.Component {
                <div>
                 <DataTable
                 title="New Report"
-                columns={columns}
+                columns={this.state.columns}
                 data={this.props.reportProjects}
                 theme='solarized'
                 customStyles={customStyles}
+                striped
+                defaultSortField='created_at'
+                defaultSortAsc
                 />
                 </div>
                 :

@@ -43,8 +43,8 @@ class ProjectEditForm extends Component {
               error: data.error
             })
           } else {
-            this.props.updateProject(data)
             this.props.history.push('/dashboard')
+            this.props.updateProject(data)
             this.props.clearEdit()
           }
         })

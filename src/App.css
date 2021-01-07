@@ -95,9 +95,20 @@
   margin: auto;
 }
 
+.report.container{
+  width: 80%;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px #265077b3;
+  margin: auto;
+}
+
+.pdf.container{
+  padding-top: 8%;
+}
+
 button.ui.teal.button{
   background-color: #265077;
-  box-shadow: 10px 10px 5px #265077b3;
+  box-shadow: 4px 4px 5px #265077b3;
 }
 
 button.ui.teal.button:hover{
