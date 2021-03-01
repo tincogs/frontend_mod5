@@ -6,8 +6,8 @@ import { logoutUser } from '../actions/auth';
 import { withRouter } from 'react-router-dom';
 import { Button, ButtonGroup, Checkbox } from 'semantic-ui-react'
 
-const clientId =
-'16925787258-d33qvibcs55vegmaumeli330mju7403o.apps.googleusercontent.com';
+const clientId = process.env.REACT_APP_CLIENT_ID
+
 
 class Logout extends React.Component {
     onSuccess = () => {

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom';
 // import Login from './Login';
-import v1Login from './v1Login';
+import Login from './Login';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import NewProjectForm from './NewProjectForm';
@@ -29,7 +29,7 @@ class App extends React.Component {
         <div>
         <Navbar icon="building" title="Real Reports" description="Project Management & Reporting" />
           <Switch>
-            <Route path='/login' component={v1Login} />
+            <Route path='/login' component={Login} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route path='/projects/edit' component={ProjectEditForm} />
             <Route exact path='/projects/new' component={NewProjectForm} />

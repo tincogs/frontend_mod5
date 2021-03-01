@@ -7,10 +7,10 @@ import GmailContainer from './GmailContainer'
 import OpenProjectsContainer from './OpenProjectsContainer'
 import ClosedProjectsContainer from './ClosedProjectsContainer'
 
-const CLIENT_ID = "16925787258-d33qvibcs55vegmaumeli330mju7403o.apps.googleusercontent.com"
-const API_KEY = "AIzaSyDRw9WrFW1cMIfGa6ENr6DiLECOEJUlVqk"
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"]
-const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID
+const API_KEY = process.env.REACT_APP_API_KEY
+const DISCOVERY_DOCS = process.env.REACT_APP_DISCOVERY_DOCS
+const SCOPES = process.env.REACT_APP_SCOPES
 
 class Dashboard extends React.Component {
 

@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import { loginSuccess, currentUser } from '../actions/auth'
 import {Button} from 'semantic-ui-react'
 
-const CLIENT_ID = "16925787258-d33qvibcs55vegmaumeli330mju7403o.apps.googleusercontent.com"
+const LOGIN_CLIENT_ID = process.env.REACT_APP_CLIENT_ID
+const LOGIN_DISCOVERY_DOCS = process.env.REACT_APP_DISCOVERY_DOCS
+const LOGIN_SCOPES = process.env.REACT_APP_SCOPES
 
 
 class Login extends React.Component {
@@ -34,8 +36,8 @@ class Login extends React.Component {
           <h3>Real Estate Project Management & Reporting</h3>
           <div>
           <GoogleLogin
-            scope="https://www.googleapis.com/auth/gmail.readonly"
-            clientId={CLIENT_ID}
+            scope={LOGIN_SCOPES}
+            clientId={LOGIN_CLIENT_ID}
             render={renderProps => (
               <Button color='green' content='Login' icon={{name:'google', color:'white'}} onClick={renderProps.onClick} disabled={renderProps.disabled}></Button>
             )}
@@ -46,7 +48,7 @@ class Login extends React.Component {
             style={{ marginTop: '100px' }}
             isSignedIn={true}
             offline='code'
-            discoveryDocs="https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"
+            discoveryDocs={LOGIN_DISCOVERY_DOCS}
           />
           </div>
         </div>
